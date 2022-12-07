@@ -59,7 +59,8 @@ $conn_2 = (object) [
 	'db_name' => 'NAME',
 	'db_user' => 'USER',
 	'db_pass' => 'PASS',
-	'db_host' => 'HOST:PORT', // -> host and port used in SSH tunnel!
+	// -> port used in SSH tunnel or standart port (3306) if SSH not required.
+	'db_host' => 'HOST:PORT',
 	'domain'  => 'you-real-site-domain-name',
 ];
 
