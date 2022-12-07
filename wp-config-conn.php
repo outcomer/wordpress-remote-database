@@ -1,8 +1,10 @@
 <?php
 /**
  * Let's say you have local WordPress App that works with database that you just do not want to make local copy of.
- * So you rise remote connection to this DB from local machine with SSH tunnel.
+ * If remote database require SSH to connect you must rise remote connection to this DB from local machine with SSH tunnel.
+ * !! If remote database does not require SSH to connect just skip this step.
  *
+ * SSH:
  * Example: plink.exe -ssh user@host -pw "******" -P remote_port -i "path to private key.ppk" -N -L 5555:127.0.0.1:3306.
  *
  * A little bit about what this means:
@@ -16,7 +18,9 @@
  * Same effect you can get using some MySQL client, let's say Heidi SQL, Dbeaver etc.
  * 5555 port can be any - it is up to you.
  *
- * But your local WP site once opened will redirect you to your real site.
+ * !!! And of cause SSH tunnel must be active all the time you are working with site locally.
+ *
+ * From now once you open your local site WP will redirect you to your real site.
  * And if you are running WP Multisite - you even will get "Error database connection".
  * This code portion solve it. It must be intergated into you local wp-config.php file.
  *
@@ -36,7 +40,7 @@
  * And if you are running multisite define DOMAIN_CURRENT_SITE like this:
  * define( 'DOMAIN_CURRENT_SITE', $domain_local );
  *
- * !!! ANd of cause SSH tunnel must be active all the time you are working with site locally.
+ * Below small part of snippet that you can customize for your connections.
  *
  * @author Outcomer <773021792e@gmail.com>
  */
