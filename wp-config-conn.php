@@ -93,7 +93,15 @@ $parse_site_query = function( WP_Site_Query &$query ) use ( $active_conn ) {
  * @param string $option WordPress web address which is set in General Options.
  */
 $option_home = function( mixed $value, string $option ) use ( $domain_local ) {
-	return "https://{$domain_local}";
+	$parsedUrl = parse_url($value) ?: [];
+
+	if (!isset($parsedUrl['host'])) {
+		return $value;
+	}
+
+	$parsedUrl['host'] = $domain_local;
+
+	return "https://{$domain_local}" . ($parsedUrl['path'] ?? '');
 };
 
 /**
@@ -103,7 +111,15 @@ $option_home = function( mixed $value, string $option ) use ( $domain_local ) {
  * @param string $option WordPress web address which is set in General Options.
  */
 $option_siteurl = function( mixed $value, string $option ) use ( $domain_local ) {
-	return "https://{$domain_local}";
+	$parsedUrl = parse_url($value) ?: [];
+
+	if (!isset($parsedUrl['host'])) {
+		return $value;
+	}
+
+	$parsedUrl['host'] = $domain_local;
+
+	return "https://{$domain_local}" . ($parsedUrl['path'] ?? '');
 };
 
 /**
